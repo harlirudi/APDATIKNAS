@@ -55,6 +55,7 @@ export default function GlobalNav() {
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -144,14 +145,40 @@ export default function GlobalNav() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: '100vh', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden fixed inset-0 top-16 bg-white z-[90] px-10 pt-10"
+              className="md:hidden fixed inset-0 top-16 bg-white z-[90] px-10 pt-10 overflow-y-auto pb-32"
             >
               <ul className="space-y-6">
                 {navItems.map((item) => (
-                  <li key={item.name}>
-                    <Link href={`/${item.name.toLowerCase()}`} className="text-[28px] font-semibold tracking-tight">
+                  <li key={item.name} className="border-b border-black/10 pb-4">
+                    <button 
+                      onClick={() => setExpandedMobileMenu(expandedMobileMenu === item.name ? null : item.name)}
+                      className="flex justify-between items-center w-full text-[28px] font-semibold tracking-tight"
+                    >
                       {item.name}
-                    </Link>
+                      <span className="text-xl font-light">{expandedMobileMenu === item.name ? '−' : '+'}</span>
+                    </button>
+                    <AnimatePresence>
+                      {expandedMobileMenu === item.name && menuContent[item.name] && (
+                        <motion.ul 
+                          initial={{ opacity: 0, height: 0 }} 
+                          animate={{ opacity: 1, height: 'auto' }} 
+                          exit={{ opacity: 0, height: 0 }}
+                          className="mt-6 flex flex-col space-y-4 overflow-hidden"
+                        >
+                          {menuContent[item.name].shop.map((subItem: string) => (
+                             <li key={subItem}>
+                               <Link 
+                                 href={`/${subItem.toLowerCase().replace(/\s+/g, '-')}`} 
+                                 className="text-[18px] text-zinc-600 font-medium hover:text-black transition-colors"
+                                 onClick={() => setIsSearchActive(false)}
+                               >
+                                 {subItem}
+                               </Link>
+                             </li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
                   </li>
                 ))}
               </ul>

@@ -25,7 +25,7 @@ export default function TvCarousel({ showTitle = true }: { showTitle?: boolean }
       )}
 
       {/* Single Large Row: Cinematic Sliders */}
-      <div className="flex space-x-6 animate-scroll-left hover:pause px-4">
+      <div className="flex space-x-6 animate-scroll-left hover-pause px-4">
         {row1.concat(row1).concat(row1).map((src, idx) => (
           <div key={idx} className="flex-shrink-0 w-[400px] md:w-[1020px] h-[220px] md:h-[574px] rounded-[32px] overflow-hidden relative group cursor-pointer shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
             <img src={src} alt="Show" className="w-full h-full object-cover" />
@@ -51,8 +51,10 @@ export default function TvCarousel({ showTitle = true }: { showTitle?: boolean }
           from { transform: translateX(0); }
           to { transform: translateX(-33.33%); }
         }
-        .hover\:pause:hover {
-          animation-play-state: paused;
+        @media (hover: hover) and (pointer: fine) {
+          .hover-pause:hover {
+            animation-play-state: paused;
+          }
         }
       `}</style>
     </section>
