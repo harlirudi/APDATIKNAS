@@ -47,3 +47,34 @@ next-env.d.ts
 
 # Local temp files
 temp/
+
+# ─── AI Cloner Template Files (not part of APDATIKNAS project) ───
+.aider.conf.yml
+.amazonq/
+.augment/
+.claude/
+.clinerules
+.codex/
+.continue/
+.cursor/
+.dockerignore
+.gemini/
+.nvmrc
+.opencode/
+.windsurf/
+.windsurfrules
+AGENTS.md
+CHANGELOG.md
+CLAUDE.md
+GEMINI.md
+GUIDE_CUSTOMIZATION.md
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+scripts/
+docs/research/
+.github/ISSUE_TEMPLATE/
+.github/PULL_REQUEST_TEMPLATE.md
+.github/copilot-instructions.md
+.github/copilot-setup-steps.yml
+.github/skills/
