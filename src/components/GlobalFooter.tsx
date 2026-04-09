@@ -1,5 +1,8 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const footerLinks = [
   {
@@ -25,6 +28,8 @@ const footerLinks = [
 ];
 
 export default function GlobalFooter() {
+  const [expandedSection, setExpandedSection] = useState<number | null>(null);
+
   return (
     <footer className="bg-[#f5f5f7] text-[#1d1d1f] pt-4 pb-8 text-xs">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -34,6 +39,7 @@ export default function GlobalFooter() {
           <p>More ways to connect: <Link href="#" className="underline text-[#0066cc]">Find an APDATIKNAS Chapter</Link> or <Link href="#" className="underline text-[#0066cc]">Contact us</Link> near you.</p>
         </div>
 
+        {/* Desktop Footer Columns */}
         <div className="hidden md:flex flex-wrap">
           {footerLinks.map((section, idx) => (
             <div key={idx} className="w-1/5 mb-6 pr-4">
@@ -51,13 +57,36 @@ export default function GlobalFooter() {
           ))}
         </div>
 
+        {/* Mobile Accordion Footer Menu */}
         <div className="md:hidden">
           {footerLinks.map((section, idx) => (
             <div key={idx} className="border-b border-[#d2d2d7]">
-              <h3 className="py-2.5 font-medium flex justify-between items-center cursor-pointer">
+              <button 
+                onClick={() => setExpandedSection(expandedSection === idx ? null : idx)}
+                className="w-full py-3.5 font-medium flex justify-between items-center text-[#1d1d1f]"
+              >
                 {section.title}
-                <svg className="w-3 h-3 fill-current" viewBox="0 0 14 14"><path d="M7 10L1 4h12z" /></svg>
-              </h3>
+                <span className="text-xl font-light">{expandedSection === idx ? '−' : '+'}</span>
+              </button>
+              <AnimatePresence>
+                {expandedSection === idx && (
+                  <motion.ul 
+                    initial={{ opacity: 0, height: 0 }} 
+                    animate={{ opacity: 1, height: 'auto' }} 
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="pb-4 space-y-3 overflow-hidden"
+                  >
+                    {section.links.map((link) => (
+                      <li key={link}>
+                        <Link href="#" className="text-[#424245] hover:text-[#1d1d1f] text-[13px] block py-1">
+                          {link}
+                        </Link>
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>

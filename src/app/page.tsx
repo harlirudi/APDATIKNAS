@@ -59,8 +59,8 @@ export default function Home() {
         superTall={true}
       />
 
-      {/* Action Button: Our Heart - Closer to Wall-E */}
-      <div className="flex flex-col items-center pt-2">
+      {/* Action Button: Our Heart - Closer to Wall-E on Mobile */}
+      <div className="flex flex-col items-center pt-2 -mt-20 md:-mt-8 relative z-10">
         <Link href="/heart" className="group">
           <div className="bg-black text-white px-12 py-4 rounded-full text-[19px] font-medium tracking-tight shadow-xl hover:scale-[1.05] active:scale-95 transition-all duration-300 cursor-pointer">
             Our Heart
