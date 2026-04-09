@@ -44,7 +44,8 @@ export default function Home() {
       </div>
 
       {/* Section 1: Start with Heart - Very close to Wall-E */}
-      <section className="pb-4 text-center">
+      {/* Hapus pb-4, tambahkan -mb-24 (mobile) dan md:-mb-40 (desktop), serta relative z-20 agar teks tetap di atas gambar */}
+      <section className="text-center -mb-64 md:-mb-80 relative z-20">
         <h1 className="text-[42px] md:text-[72px] font-light tracking-[0.08em] text-slate-900 animate-fade-in">
           Start with Heart.
         </h1>
@@ -60,7 +61,8 @@ export default function Home() {
       />
 
       {/* Action Button: Our Heart - Closer to Wall-E on Mobile */}
-      <div className="flex flex-col items-center pt-2 -mt-20 md:-mt-8 relative z-10">
+      {/* Ubah -mt-20 dan md:-mt-8 menjadi nilai yang lebih besar, misalnya -mt-40 dan md:-mt-32 */}
+      <div className="flex flex-col items-center pt-2 -mt-104 md:-mt-96 relative z-10">
         <Link href="/heart" className="group">
           <div className="bg-black text-white px-12 py-4 rounded-full text-[19px] font-medium tracking-tight shadow-xl hover:scale-[1.05] active:scale-95 transition-all duration-300 cursor-pointer">
             Our Heart
